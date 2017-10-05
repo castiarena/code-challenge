@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import webpack from 'webpack';
 import path from 'path';
 import CleanWebpackPlugin from 'clean-webpack-plugin';

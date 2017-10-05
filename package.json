@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "webpack",
+    "start:dev": "babel-node index-dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
