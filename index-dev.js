@@ -26,5 +26,5 @@ const devServer = new WebpackDevServer(compiler, {
 });
 
 devServer.listen(port, 'localhost', () =>
-    open(`http://localhost:${port}/`)
+    open(`http://localhost:${port}/scripts/code-challenge`)
 );

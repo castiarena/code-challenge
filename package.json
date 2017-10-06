@@ -10,7 +10,9 @@
   "scripts": {
     "start": "webpack",
     "start:dev": "babel-node index-dev.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel-node ./node_modules/.bin/istanbul cover _mocha -- --compilers js:babel-core/register \"test/unit/*.spec.js\" --recursive",
+    "test:watch": "babel-node ./node_modules/.bin/istanbul cover _mocha -- --compilers js:babel-core/register \"test/unit/*.spec.js\" --recursive --watch",
+    "coverage": "npm test && open coverage/lcov-report/index.html"
   },
   "devDependencies": {
     "autoprefixer": "6.0.3",
