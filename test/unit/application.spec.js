@@ -1,36 +1,17 @@
 
+import data from '../../host-app-data.json';
 import { expect } from 'chai';
-import { Application, Contributor,
-    Appdex, Host, Release} from '../../src/components';
+import { Application } from '../../src/components';
 
 describe('Application test suite', ()=>{
-    let application,
-        contributors,
-        host,
-        appdex,
-        release;
-    beforeEach(()=>{
 
-        contributors = [
-            new Contributor('name1'),
-            new Contributor('name2'),
-            new Contributor('name3')
-        ];
-        host = new Host('bar-baz.mock.url');
-        appdex = 40;
-        release = new Release(4);
-
-        application = new Application(
-            host,
-            appdex,
-            release,
-            contributors
-        );
+    it('should print data for an application', ()=>{
+        expect(new Application(data[0]).print())
+            .to.be.equal('68 Small Fresh Pants - Kautzer - Boyer, and Sons');
     });
 
     it('should instance a new contributor with name', ()=>{
-
-        expect(application)
-            .to.be.equal();
+        expect(new Application(data[1]).print())
+            .to.be.equal('57 Refined Concrete Shirt - Hudson - Sauer, Group');
     });
 });

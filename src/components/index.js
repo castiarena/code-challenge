@@ -1,13 +1,13 @@
-import Appdex from './appdex';
+import Apdex from './apdex';
 import Application from './application';
 import Contributor from './contributor';
 import Host from './host';
-import Release from './release';
+import ApplicationsList from './applications-list';
 
 export {
-    Appdex,
+    Apdex,
     Application,
+    ApplicationsList,
     Contributor,
-    Host,
-    Release
+    Host
 }

@@ -11,7 +11,7 @@ describe('Host test suite', ()=>{
     });
 
     it('should print the domain of host', ()=>{
-        expect(host.description())
+        expect(host.url())
             .to.be.equal(`${name}.${domain}`);
     });
 

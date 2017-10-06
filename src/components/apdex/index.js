@@ -1,2 +1,2 @@
 import Apdex from './Apdex';
-export default Appdex;
+export default Apdex;
