@@ -7,7 +7,6 @@ import config from './webpack.config.babel';
 
 const port = 9000;
 
-
 Object.keys(config.entry).forEach( bundle =>
     config.entry[bundle] = [
         config.entry[bundle],
@@ -26,9 +25,6 @@ const devServer = new WebpackDevServer(compiler, {
     port
 });
 
-devServer.app.use(routes);
-devServer.app.use(express.static('build'));
-devServer.app.set('views', __dirname + '/src/views');
 devServer.listen(port, 'localhost', () =>
     open(`http://localhost:${port}/`)
 );
