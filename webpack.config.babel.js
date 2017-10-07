@@ -25,5 +25,9 @@ export default {
                 }
             }
         ]
-    }
+    },
+
+    plugins: [
+        new webpack.SourceMapDevToolPlugin()
+    ]
 }
