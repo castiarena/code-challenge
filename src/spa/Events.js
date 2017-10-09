@@ -1,7 +1,6 @@
 
 export default class Events {
     constructor(events = {}, name = 'Events'){
-        this.name = name;
         this._events = events;
         Object.keys(this._events).forEach(eventName =>{
             this._events[eventName] = [];
@@ -13,7 +12,7 @@ export default class Events {
             this._events[event].push(callback);
             return;
         }
-        throw `${event} not found at ${this.name}: try with one of ${JSON.stringify(this._events)}`;
+        throw `${event} not found: try with one of ${JSON.stringify(this._events)}`;
     }
 
     trigger(event, injected){
@@ -25,7 +24,7 @@ export default class Events {
             );
             return;
         }
-        throw `${event} not found at ${this.name}: try with one of ${JSON.stringify(this._events)}`;
+        throw `${event} not found: try with one of ${JSON.stringify(this._events)}`;
     }
 
 }

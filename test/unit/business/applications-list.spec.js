@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
-import { ApplicationsList, Application } from '../../src/components';
-import data from '../../host-app-data.json';
+import { ApplicationsList, Application } from '../../../src/components';
+import data from '../../../host-app-data.json';
 
 describe('Applications List test suite', ()=>{
 

@@ -26,9 +26,12 @@ export default class ApplicationsList{
     }
 
     orderByApdex(){
-        this.applications.sort( (app1 , app2) =>
-            app1.satisfaction() < app2.satisfaction() ? 1 : 0
-        )
+        this.applications.sort( (app1 , app2) =>{
+            const diff = app1.satisfaction() - app2.satisfaction();
+            if(diff === 0) return 0;
+            if(diff < 0) return 1;
+            if(diff > 0) return -1;
+        });
     }
 
     findAppByIndex(index){

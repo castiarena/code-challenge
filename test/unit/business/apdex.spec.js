@@ -1,6 +1,6 @@
 
 import { expect } from 'chai';
-import { Apdex } from '../../src/components';
+import { Apdex } from '../../../src/components';
 
 describe('Apdex test suite', ()=>{
 

@@ -1,35 +1,25 @@
-export default class View {
-    constructor( name, tagName = 'div', childViews = [] ) {
+import Compiler from './Compiler';
+
+export default class View extends Compiler{
+    constructor( name, template, data) {
+        super(template, data);
         this.name = name;
-        this.elem = document.createElement(tagName);
-        this.childViews = childViews;
     }
 
-    template(template , data){
-        this.elem.innerHTML = this.compile(template, data);
+    mountTo(element, callback){
+        this._baseElement = element;
+        this._wrapper = this.getElementFromTemplate();
+        this._wrapper.addEventListener('DOMNodeInserted',
+            this.handlerNodeInserted.bind(this,
+                { view: this, element: this._wrapper, callback})
+        );
+        this._baseElement.appendChild(this._wrapper);
     }
 
-    compile(template, data){
-        Object.keys(data).forEach( key => {
-            template = template.replace( new RegExp( `{{${key}}}` , 'g'), data[key]);
-        });
-        return template
+    handlerNodeInserted(event){
+        event.view._wrapper = event.element.cloneNode(true);
+        event.element.parentNode.replaceChild(event.view._wrapper, event.element);
+        this.trigger('mounted');
     }
 
-    content( string ) {
-        this.elem.textContent = string;
-    }
-
-    addView(view){
-        this.childViews.push(view);
-        this.render();
-    }
-
-    render(){
-        this.childViews.forEach(childView => childView.showOn(this.elem));
-    }
-
-    showOn( elem ) {
-        elem.appendChild(this.elem);
-    }
 }

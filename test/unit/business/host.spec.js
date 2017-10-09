@@ -1,6 +1,6 @@
 
 import { expect } from 'chai';
-import { Host } from '../../src/components';
+import { Host } from '../../../src/components';
 
 describe('Host test suite', ()=>{
     let name, domain, host;
