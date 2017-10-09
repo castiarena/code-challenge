@@ -8,8 +8,7 @@
     "npm": "5.3.0"
   },
   "scripts": {
-    "start": "webpack",
-    "start:dev": "babel-node index-dev.js",
+    "start": "babel-node index-dev.js",
     "test": "babel-node ./node_modules/.bin/istanbul cover _mocha -- --compilers js:babel-core/register \"test/unit/**/*.spec.js\" --recursive",
     "test:watch": "babel-node ./node_modules/.bin/istanbul cover _mocha -- --compilers js:babel-core/register \"test/unit/**/*.spec.js\" --recursive --watch",
     "coverage": "npm test && open coverage/lcov-report/index.html"

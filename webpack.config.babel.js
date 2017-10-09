@@ -57,7 +57,7 @@ export default {
     },
 
     plugins: [
-        new ExtractTextPlugin("styles.css"),
+        new ExtractTextPlugin("style/styles.css"),
         new webpack.SourceMapDevToolPlugin(),
         new CleanWebpackPlugin(['build', 'dist'])
     ]

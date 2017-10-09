@@ -5,16 +5,9 @@ import { Spa , View } from './spa';
 import { ApplicationsList , Application } from './components';
 
 
-const hosts = [
-    '7e6272f7-098e.dakota.biz',
-    '1d717554-bf17.sydnie.name',
-    '9a450527-cdd9.kareem.info'
-];
-
 const spa = new Spa( document.querySelector('body'));
 spa.on('start', () => {
-
-    const hostsData = new Get(`http://localhost:9000/host-app-data.json`);
+    const hostsData = new Get(`host-app-data.json`);
     hostsData.then( data => {
         const applications = data.map(data => new Application(data));
         const appsList = new ApplicationsList(applications);
@@ -76,10 +69,7 @@ spa.on('start', () => {
             }
         );
 
-        spa.renderViews([
-            pageView
-        ]);
-
+        spa.renderViews([pageView]);
         spa.bindEvents(document.querySelectorAll('[data-event]'));
 
     });
