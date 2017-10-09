@@ -1,6 +1,6 @@
-import {
-    Contributor, Apdex, Host
-} from '../';
+import Contributor from '../contributor/Contributor';
+import Apdex from '../apdex/Apdex';
+import Host from '../host/Host';
 
 
 export default class Application {

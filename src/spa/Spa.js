@@ -8,7 +8,7 @@ export default class Spa extends Events{
         });
         this._rootElement = rootElement;
         this.views = views;
-        window.addEventListener('load', e => this.init());
+        window.addEventListener('load', this.init.bind(this));
     }
 
     init(){

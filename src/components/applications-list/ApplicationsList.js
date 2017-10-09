@@ -1,4 +1,4 @@
-import { Host } from '../';
+import Host from '../host/Host';
 
 export default class ApplicationsList{
     constructor( applications ){

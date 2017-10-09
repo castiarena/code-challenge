@@ -1,6 +1,6 @@
 
 import { expect } from 'chai';
-import { Contributor } from '../../../src/components';
+import Contributor  from '../../../src/components/contributor/Contributor';
 
 describe('Contributor test suite', ()=>{
 

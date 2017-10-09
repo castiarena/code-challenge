@@ -7,10 +7,10 @@ require('jsdom-global')();
 describe('Compiler test suite', () => {
 
     it('should create element from tag on template',()=>{
-        const compiler = new Compiler('<div class="pepe" id="id">baz</div>');
-        expect(compiler.getElementFromTemplate().children[0].innerHTML)
+        const compiler = new Compiler('<div class="pepe" mock-attribute="id">baz</div>');
+        expect(compiler.getElementFromTemplate().innerHTML)
             .to.be.equal('baz');
-        expect(compiler.getElementFromTemplate().children[0].id)
+        expect(compiler.getElementFromTemplate().getAttribute('mock-attribute'))
             .to.be.equal('id');
     });
 
@@ -18,12 +18,12 @@ describe('Compiler test suite', () => {
         const info = 'mock';
         const id = 'mockId';
         const compiler = new Compiler(
-            '<div class="pepe" id="{{id}}">baz {{info}}</div>',
+            '<div class="pepe" mock-attribute="{{id}}">baz {{info}}</div>',
             { info , id}
         );
-        expect(compiler.getElementFromTemplate().children[0].innerHTML)
+        expect(compiler.getElementFromTemplate().innerHTML)
             .to.be.equal(`baz ${info}`);
-        expect(compiler.getElementFromTemplate().children[0].id)
+        expect(compiler.getElementFromTemplate().getAttribute('mock-attribute'))
             .to.be.equal(id);
     });
 
@@ -32,7 +32,7 @@ describe('Compiler test suite', () => {
         const compiler = new Compiler(
             '<p>' +
                 'baz ' +
-                '<span mock-attr="213" spa:add:views="{{pepe}}" on:click="click">{{info}}</span>' +
+                '<span mock-attr="213">{{info}}</span>' +
                 '{{mock}}' +
             '</p>',
             { info , mock:'da'}

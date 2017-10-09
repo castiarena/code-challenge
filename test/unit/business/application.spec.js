@@ -1,7 +1,7 @@
 
 import data from '../../../host-app-data.json';
 import { expect } from 'chai';
-import { Application } from '../../../src/components';
+import Application from '../../../src/components/application/Application';
 
 describe('Application test suite', ()=>{
 

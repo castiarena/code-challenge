@@ -12,7 +12,6 @@ export default class Events {
             this._customEvents[event].push(callback);
             return;
         }
-        throw `${event} not found: try with one of ${JSON.stringify(this._customEvents)}`;
     }
 
     trigger(event, injected){
@@ -24,7 +23,6 @@ export default class Events {
             );
             return;
         }
-        throw `${event} not found: try with one of ${JSON.stringify(this._customEvents)}`;
     }
 
 }
