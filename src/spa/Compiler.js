@@ -16,11 +16,11 @@ export default class Compiler extends Events{
             updated: null
         });
 
+        this._id = uuid();
         this._events = [];
         this.data = this.filterEvents(data);
         this.template = template;
         this._baseElement = null;
-        this._id = uuid();
         this.views = [];
     }
 
@@ -58,13 +58,15 @@ export default class Compiler extends Events{
 
     filterEvents(data){
         const filterData = {};
+        const id = this._id;
+
         Object.keys(data).forEach( key => {
             if(!key.match(/on(.*)/)){
                 filterData[key] = data[key];
                 return;
             }
             let objEvent = {};
-            objEvent[key] = {
+            objEvent[key+id] = {
                 handler: data[key],
                 event: /on(.*)/.exec(key)[1].toLowerCase()
             };

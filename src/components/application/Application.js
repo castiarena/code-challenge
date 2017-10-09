@@ -18,6 +18,7 @@ export default class Application {
         this.contributors = data.contributors.map( name =>
             new Contributor(name)
         );
+        this.version = data.version;
         this.host = data.host.map( url => new Host(url));
     }
 

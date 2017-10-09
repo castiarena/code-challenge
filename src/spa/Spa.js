@@ -20,6 +20,7 @@ export default class Spa extends Events{
         views.forEach(view => view.mountTo(this._rootElement));
     }
 
+
     bindEvents(eventElements){
         [].forEach.call(eventElements, elem => this.findAndBindEvent(elem))
     }
@@ -27,11 +28,27 @@ export default class Spa extends Events{
     findAndBindEvent(elem){
         const eventName = elem.getAttribute('data-event');
         let eventSaved = null;
-        this.views.map( view => {
+        this.views.forEach( view => {
             view._events.forEach(event => Object.keys(event).forEach(key => {
-                eventSaved = key === eventName ? event[key]: null;
+                eventSaved = key === eventName+view._id ? event[key]: null;
+                if(eventSaved){
+                    elem.addEventListener(eventSaved.event, eventSaved.handler, true);
+                }
             }));
+            view.views.forEach(view => {
+                view._events.forEach(event => Object.keys(event).forEach(key => {
+                    eventSaved = key === eventName+view._id ? event[key]: null;
+                    if(eventSaved && elem.id === view._id){
+                        elem.addEventListener(eventSaved.event, eventSaved.handler, true);
+                    }
+                }));
+                view.views.forEach(view => view._events.forEach(event => Object.keys(event).forEach(key => {
+                    eventSaved = key === eventName+view._id ? event[key]: null;
+                    if(eventSaved  && elem.id === view._id){
+                        elem.addEventListener(eventSaved.event, eventSaved.handler, true);
+                    }
+                })));
+            });
         });
-        elem.addEventListener(eventSaved.event, eventSaved.handler, true);
     }
 }

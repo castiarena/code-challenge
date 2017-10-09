@@ -4,6 +4,7 @@ import { Get } from './request';
 import { Spa , View } from './spa';
 import { ApplicationsList , Application } from './components';
 
+
 const hosts = [
     '7e6272f7-098e.dakota.biz',
     '1d717554-bf17.sydnie.name',
@@ -17,7 +18,7 @@ spa.on('start', () => {
     hostsData.then( data => {
         const applications = data.map(data => new Application(data));
         const appsList = new ApplicationsList(applications);
-
+        const hosts = appsList.getAllHosts();
         const pageView = new View('hosts',
             '<main class="main-content">' +
                 '<section class="app-row">' +
@@ -55,14 +56,17 @@ spa.on('start', () => {
                         '</article>', {
                             host,
                             appsViewList: () =>
-                                appsList.getTopAppsByHost(host).map(app =>
+                                appsList.getTopAppsByHost(host, 5).map(app =>
                                     new View(app.name,
-                                        '<li class="app-list--item" data-on-click>' +
+                                        '<li class="app-list--item" data-event="onClick">' +
                                             '<p class="app-name">' +
                                                 '<span class="app-apdex">{{apdex}}</span>' +
                                                 '<span class="app-name--wrapper">{{name}}</span>' +
                                             '</p>' +
                                         '</li>', {
+                                            onClick: () =>{
+                                                alert(`${app.name} \n version: ${app.version}`)
+                                            },
                                             apdex: app.satisfaction(),
                                             name: app.name
                                         })

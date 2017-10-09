@@ -92,5 +92,18 @@ describe('Applications List test suite', ()=>{
         expect(appsList.getTopAppsByHost(hostName).length).to.be.equal(appsList.max);
     });
 
+    it('should return a list of every host on demand' , () => {
+        const firstFiftyAppsData = Object.assign([], data).splice(0,2);
+        const appsList = new ApplicationsList(
+            firstFiftyAppsData.map( data => new Application(data))
+        );
+
+        expect(appsList.getAllHosts()[0]).to.be.equal(
+            '7e6272f7-098e.dakota.biz'
+        );
+        expect(appsList.getAllHosts()[1]).to.be.equal(
+            '9a450527-cdd9.kareem.info'
+        );
+    })
 });
 

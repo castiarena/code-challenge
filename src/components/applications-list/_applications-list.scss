@@ -25,7 +25,12 @@
 .app-list--item {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 5px 10px;
+  transition: background-color .5s linear;
+  &:hover{
+    cursor: pointer;
+    background-color: $body-background-color;
+  }
 }
 
 .apps-as-list--toggle {

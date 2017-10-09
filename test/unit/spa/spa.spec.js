@@ -28,13 +28,32 @@ describe('Spa suite tests', () => {
         expect(spy).to.be.called.exactly(2);
     });
 
-    it.skip('should render new views', () =>{
+    it('should render new views', () =>{
         const spy = chai.spy();
         const spa = new Spa(document.body, '<div data-event="onMock">{{template}}</div>');
         spa.views = [{
-            _events: [{ onMock: { event: 'mock', handler: spy } }]
+            _events: [{ onMock: { event: 'mock', handler: spy } }],
+            views:[]
         }];
 
         spa.findAndBindEvent(document.body);
+        expect(spy).to.be.called.exactly(0);
+    });
+    it('should render new views', () =>{
+        const spy = chai.spy();
+        const spa = new Spa(document.body, '<div data-event="onMock">{{template}}</div>');
+        spa.views = [{
+            _events: [{ onMock: { event: 'mock', handler: spy } }],
+            views:[{
+                _events: [{ onMock: { event: 'mock', handler: spy } }],
+                views:[{
+                    _events: [{ onMock: { event: 'mock', handler: spy } }],
+                    views:[]
+                }]
+            }]
+        }];
+
+        spa.findAndBindEvent(document.body);
+        expect(spy).to.be.called.exactly(0);
     });
 });

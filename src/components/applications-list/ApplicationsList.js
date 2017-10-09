@@ -6,7 +6,7 @@ export default class ApplicationsList{
         this.max = 25;
     }
 
-    getTopAppsByHost( hostName ){
+    getTopAppsByHost( hostName , cant = this.max){
         this.orderByApdex();
         const apps = Object.assign([], this.applications);
 
@@ -14,7 +14,7 @@ export default class ApplicationsList{
             app.host.some( host =>
                 host.url() === hostName
             ) ? app : null
-        ).splice(0, this.max);
+        ).splice(0, cant);
     }
 
     addAppToHosts(app, host){
@@ -40,5 +40,15 @@ export default class ApplicationsList{
 
     print(){
         return this.applications.map(app => app.print()).join('\n');
+    }
+
+    getAllHosts(){
+        let allHosts = {};
+        this.applications.forEach(app => {
+            app.host.forEach(host => {
+                allHosts[host.url()] = host;
+            });
+        });
+        return Object.keys(allHosts).map( key => key);
     }
 }
