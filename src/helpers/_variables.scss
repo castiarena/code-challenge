@@ -1,0 +1,23 @@
+$font-family-base: 'Helvetica Neue', sans-serif;
+$font-size-s: 13px;
+$font-size-base: 16px;
+$font-size-l: 18px;
+$font-size-xl: 35px;
+
+$line-height-base: 19px;
+$line-height-l: 22px;
+$line-height-xl: 43px;
+
+$text-color: #4a4a4a;
+
+$body-background-color: #fafafa;
+
+$container-max-width: 840px;
+
+$gutter-s: 15px;
+$gutter-m: 23px;
+$gutter:   30px;
+
+$grid-width: calc(50% - #{$gutter*2.5});
+$grid-full-width: calc(100% - #{$gutter*2.5});
+

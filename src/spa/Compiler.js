@@ -12,14 +12,16 @@ export default class Compiler extends Events{
     constructor(template, data = {}){
         super({
             compiled: null,
-            mounted: null
+            mounted: null,
+            updated: null
         });
 
-        this.events = [];
+        this._events = [];
         this.data = this.filterEvents(data);
         this.template = template;
         this._baseElement = null;
         this._id = uuid();
+        this.views = [];
     }
 
     /**
@@ -45,9 +47,10 @@ export default class Compiler extends Events{
     compileTemplate(){
         let templateCompiled = this.template;
         Object.keys(this.data).forEach( key => {
-            const partial = typeof this.data[key] !== 'function' ? this.data[key] : this.data[key]().map(view =>
-                    view.getElementFromTemplate().outerHTML
-                ).join('');
+            const partial = typeof this.data[key] !== 'function' ? this.data[key] : this.data[key]().map(view => {
+                this.views.push(view);
+                return view.getElementFromTemplate().outerHTML
+            }).join('');
             templateCompiled = templateCompiled.replace( new RegExp( `{{${key}}}` , 'g'), partial);
         });
         return templateCompiled;
@@ -61,14 +64,12 @@ export default class Compiler extends Events{
                 return;
             }
             let objEvent = {};
-            objEvent[key] = data[key];
-            this.events.push(objEvent);
+            objEvent[key] = {
+                handler: data[key],
+                event: /on(.*)/.exec(key)[1].toLowerCase()
+            };
+            this._events.push(objEvent);
         });
         return filterData;
-    }
-
-    bindEvents(){
-        const wrapper = document.getElementById(this._id);
-        console.log(wrapper);
     }
 }

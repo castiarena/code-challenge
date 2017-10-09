@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer'
 import path from 'path';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ExtractTextPlugin from  'extract-text-webpack-plugin';
@@ -41,8 +42,8 @@ export default {
                         }, {
                             loader: 'sass-loader',
                             options: {
+                                data: '@import "helpers/helpers";',
                                 indentedSyntax: false,
-                                data: '@import "../../helpers/styles/helpers";',
                                 compressed: true,
                                 includePaths: [
                                     path.resolve('./node_modules'),
@@ -56,6 +57,7 @@ export default {
     },
 
     plugins: [
+        new ExtractTextPlugin("styles.css"),
         new webpack.SourceMapDevToolPlugin(),
         new CleanWebpackPlugin(['build', 'dist'])
     ]

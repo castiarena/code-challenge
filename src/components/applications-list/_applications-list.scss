@@ -1,0 +1,39 @@
+
+.app-list--description {
+  padding: 0 0 0 $gutter-s;
+}
+
+.app-list--wrapper {
+  background-color: #fff;
+  padding: $gutter;
+  width: $grid-width;
+  margin: 0 0 $gutter+$gutter-s 0;
+
+  &:nth-child(odd) {
+    margin: 0 $gutter $gutter+$gutter-s 0;
+  }
+}
+.app-row-list .app-list--wrapper {
+  width: $grid-full-width;
+}
+
+.app-list {
+  margin: 0;
+  padding: 0;
+}
+
+.app-list--item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.apps-as-list--toggle {
+  font-size: $font-size-s;
+  &:hover{
+    cursor: pointer;
+  }
+  input[type=checkbox]{
+    margin: 0 ($gutter-s/2) 0 0;
+  }
+}

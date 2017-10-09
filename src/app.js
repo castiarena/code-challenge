@@ -1,3 +1,5 @@
+import './_normalize.scss';
+import './_app.scss';
 import { Get } from './request';
 import { Spa , View } from './spa';
 import { ApplicationsList , Application } from './components';
@@ -7,8 +9,6 @@ const hosts = [
     '1d717554-bf17.sydnie.name',
     '9a450527-cdd9.kareem.info'
 ];
-
-
 
 const spa = new Spa( document.querySelector('body'));
 spa.on('start', () => {
@@ -21,38 +21,50 @@ spa.on('start', () => {
         const pageView = new View('hosts',
             '<main class="main-content">' +
                 '<section class="app-row">' +
-                    '<div class="app-grid">'+
+                    '<div class="app-grid--inline">'+
                         '<h1 class="app-list--title">Apps by Host</h1>' +
                         '<p class="app-list--description">for user {{user}}</p>' +
-                    '<div>'+
-                    '<div class="app-grid">' +
-                        '<label for="asList"><input type="checkbox" id="asList" name="asList">Show as list</label>'+
+                    '</div>'+
+                    '<div class="app-grid--inline">' +
+                        '<input class="app-checkbox--as-list" data-event="onChange" type="checkbox" id="asList" name="asList">' +
+                        '<label for="asList" class="apps-as-list--toggle">' +
+                            'Show as list' +
+                        '</label>'+
                     '</div>'+
                 '</section>'+
-                '{{hostListViews}}' +
+                '<section class="app-row" data-change>' +
+                    '{{hostListViews}}' +
+                '</section>'+
             '</main>', {
-                user:'averylongnemailaddress@companyname.com',
+                user: 'averylongnemailaddress@companyname.com',
+                onChange: (e) => {
+                    const toggleClass = 'app-row-list';
+                    const toggleElem = document.querySelector('[data-change]');
+                    toggleElem.className = toggleElem.className.match(toggleClass) ?
+                        toggleElem.className.replace( new RegExp(' '+toggleClass), ''):
+                        toggleElem.className +' '+ toggleClass;
+                    e.target.parentNode.querySelector('.apps-as-list--toggle').innerHTML =
+                        toggleElem.className.match(toggleElem) ?
+                            'Show as grid' : 'Show as list';
+                },
                 hostListViews: () => hosts.map( host => {
                     return new View(host,
-                        '<section class="host-list--wrapper">' +
-                            '<h1 class="host-title">{{host}}</h1>' +
+                        '<article class="app-grid app-list--wrapper">' +
+                            '<h2 class="host-title">{{host}}</h2>' +
                             '<ul class="app-list">{{appsViewList}}</ul>' +
-                        '</section>', {
+                        '</article>', {
                             host,
                             appsViewList: () =>
                                 appsList.getTopAppsByHost(host).map(app =>
                                     new View(app.name,
-                                        '<li class="app-list" data-on-click>' +
+                                        '<li class="app-list--item" data-on-click>' +
                                             '<p class="app-name">' +
                                                 '<span class="app-apdex">{{apdex}}</span>' +
-                                                '{{name}}' +
+                                                '<span class="app-name--wrapper">{{name}}</span>' +
                                             '</p>' +
                                         '</li>', {
                                             apdex: app.satisfaction(),
-                                            name: app.name,
-                                            onClick: () => {
-                                                console.log(app);
-                                            }
+                                            name: app.name
                                         })
                                 )
                         })
@@ -64,7 +76,7 @@ spa.on('start', () => {
             pageView
         ]);
 
-        setTimeout(appsList.removeAppFromHosts(appsList.findAppByIndex()))
+        spa.bindEvents(document.querySelectorAll('[data-event]'));
 
     });
 });

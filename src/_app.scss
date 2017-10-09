@@ -1,0 +1,41 @@
+body {
+  font-family: $font-family-base;
+  background-color: $body-background-color;
+  padding: 50px 0 20px;
+}
+
+.main-content {
+  display: block;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $gutter;
+}
+
+.app-row {
+  &:after{
+    content:' ';
+    display: table;
+    clear: both;
+  }
+}
+.app-row-list .app-grid {
+  width: 100%;
+}
+
+.app-grid {
+  width: 50%;
+  float: left;
+  transition: width .6s ease-in-out;
+}
+
+.app-grid--inline {
+  padding: 0 $gutter 0 0;
+  * , &{
+    display: inline-block;
+    vertical-align: baseline;
+  }
+}
+
+.app-checkbox--as-list {
+  margin: 0 $gutter-s 0 0;
+}
